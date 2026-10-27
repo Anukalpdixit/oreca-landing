@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { DOWNLOAD_CONFIG } from "@/config/downloads"
+import { Download } from "lucide-react"
 
 const NAV_LINKS = [
   { label: "Platform",     href: "#platform" },
@@ -19,6 +21,18 @@ const NAV_STYLE = {
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
+  const [downloadUrl, setDownloadUrl] = useState(DOWNLOAD_CONFIG.windows.url)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const ua = window.navigator.userAgent.toLowerCase()
+      if (ua.includes("mac") || ua.includes("darwin")) {
+        setDownloadUrl(DOWNLOAD_CONFIG.mac.url)
+      } else {
+        setDownloadUrl(DOWNLOAD_CONFIG.windows.url)
+      }
+    }
+  }, [])
 
   const close = () => setOpen(false)
 
@@ -47,9 +61,15 @@ export function MobileNav() {
           </div>
 
           <div className="flex items-center gap-2">
-            <button className="text-[11px] px-4 py-2 rounded-xl border border-black/10 text-black/60 hover:text-black hover:border-black/20 hover:bg-black/[0.03] transition-all duration-200 tracking-wide hidden md:block" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
-              START BUILDING
-            </button>
+            <a
+              href={downloadUrl}
+              download
+              className="text-[11px] font-medium px-4 py-2 rounded-xl bg-[#111] text-white hover:bg-black transition-all duration-200 tracking-wide hidden md:inline-flex items-center gap-1.5 shadow-sm"
+              style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>DOWNLOAD</span>
+            </a>
 
             {/* Burger — mobile only */}
             <button
@@ -86,7 +106,7 @@ export function MobileNav() {
         {/* Mobile dropdown */}
         <div
           className="md:hidden mt-2 overflow-hidden transition-all duration-300 ease-in-out"
-          style={{ maxHeight: open ? "320px" : "0px", opacity: open ? 1 : 0 }}
+          style={{ maxHeight: open ? "340px" : "0px", opacity: open ? 1 : 0 }}
         >
           <div
             className="rounded-2xl border border-black/[0.06] px-2 py-2 flex flex-col"
@@ -104,9 +124,16 @@ export function MobileNav() {
               </a>
             ))}
             <div className="mt-1 px-2 pb-1">
-              <button className="w-full text-[11px] px-4 py-2.5 rounded-xl border border-black/10 text-black/60 hover:text-black hover:border-black/20 hover:bg-black/[0.03] transition-all duration-200 tracking-wide" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
-                START BUILDING
-              </button>
+              <a
+                href={downloadUrl}
+                download
+                onClick={close}
+                className="w-full text-[11px] font-medium px-4 py-2.5 rounded-xl bg-[#111] text-white hover:bg-black transition-all duration-200 tracking-wide inline-flex items-center justify-center gap-2"
+                style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>DOWNLOAD APP</span>
+              </a>
             </div>
           </div>
         </div>

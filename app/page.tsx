@@ -9,6 +9,7 @@ import { RevealText } from "@/components/reveal-text"
 import { StackingAgentCards } from "@/components/stacking-agent-cards"
 import { MobileNav } from "@/components/mobile-nav"
 import { DevExSection } from "@/components/devex-section"
+import { DownloadCTA } from "@/components/download-cta"
 
 // ─── Intersection Observer hook ──────────────────────────────────────────────
 function useInView(threshold = 0.15) {
@@ -170,9 +171,9 @@ export default function AgenticPage() {
             Create, compose, and deploy autonomous agents that work 24/7. No boilerplate required.
           </p>
 
-          {/* CTA Button */}
-          <button
-            className="px-8 py-3 bg-[#111] text-white rounded-full font-medium text-sm hover:bg-black/80 transition-colors"
+          {/* Desktop Download CTA */}
+          <div
+            className="w-full flex justify-center"
             style={{
               opacity: heroReady ? 1 : 0,
               filter: heroReady ? "blur(0px)" : "blur(16px)",
@@ -180,8 +181,8 @@ export default function AgenticPage() {
               transition: "opacity 0.8s cubic-bezier(0.16,1,0.3,1) 240ms, filter 0.8s cubic-bezier(0.16,1,0.3,1) 240ms, transform 0.8s cubic-bezier(0.16,1,0.3,1) 240ms",
             }}
           >
-            Get Started
-          </button>
+            <DownloadCTA align="center" showAlternatives={true} />
+          </div>
 
           {/* Metrics below CTA */}
           <div
@@ -692,6 +693,13 @@ export default function AgenticPage() {
               {"You're on the list. We'll be in touch."}
             </div>
           )}
+
+          <div className="mt-10 pt-8 border-t border-black/[0.08] flex flex-col items-center">
+            <span className="text-xs tracking-widest uppercase text-black/40 mb-4 font-mono">
+              Or run natively on desktop
+            </span>
+            <DownloadCTA align="center" showAlternatives={true} />
+          </div>
         </div>
       </section>
 
