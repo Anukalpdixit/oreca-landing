@@ -14,6 +14,7 @@ export interface DownloadConfig {
   version: string
   releaseTag: string
   windows: PlatformDownload
+  mac: PlatformDownload
   macArm: PlatformDownload
   macIntel: PlatformDownload
   githubReleases: string
@@ -33,8 +34,21 @@ export const DOWNLOAD_CONFIG: DownloadConfig = {
       "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca.Setup.0.1.0.exe",
     fallbackUrl: "https://github.com/Anukalpdixit/oreca-release/releases",
     filename: "Oreca Setup 0.1.0.exe",
-    size: "208 MB",
+    size: "181 MB",
     requirements: "Windows 10 (version 1903+) or Windows 11 (64-bit)",
+  },
+  mac: {
+    name: "macOS",
+    label: "macOS (Apple Silicon & Intel)",
+    ext: ".dmg",
+    arch: "Universal",
+    url:
+      process.env.NEXT_PUBLIC_MAC_DOWNLOAD_URL ||
+      "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca-0.1.0.dmg",
+    fallbackUrl: "https://github.com/Anukalpdixit/oreca-release/releases",
+    filename: "Oreca-0.1.0.dmg",
+    size: "165 MB",
+    requirements: "macOS 12.0 Monterey, Ventura, Sonoma, or Sequoia",
   },
   macArm: {
     name: "macOS (Apple Silicon)",
@@ -43,11 +57,11 @@ export const DOWNLOAD_CONFIG: DownloadConfig = {
     arch: "arm64",
     url:
       process.env.NEXT_PUBLIC_MAC_DOWNLOAD_URL ||
-      "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca-0.1.0-arm64.dmg",
+      "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca-0.1.0.dmg",
     fallbackUrl: "https://github.com/Anukalpdixit/oreca-release/releases",
-    filename: "Oreca-0.1.0-arm64.dmg",
-    size: "185 MB",
-    requirements: "macOS 12.0 Monterey, Ventura, Sonoma, or Sequoia",
+    filename: "Oreca-0.1.0.dmg",
+    size: "165 MB",
+    requirements: "macOS 12.0 Monterey, Ventura, Sonoma, or Sequoia (M1/M2/M3/M4)",
   },
   macIntel: {
     name: "macOS (Intel)",
@@ -56,10 +70,10 @@ export const DOWNLOAD_CONFIG: DownloadConfig = {
     arch: "x64",
     url:
       process.env.NEXT_PUBLIC_MAC_INTEL_DOWNLOAD_URL ||
-      "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca-0.1.0-x64.dmg",
+      "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca-0.1.0.dmg",
     fallbackUrl: "https://github.com/Anukalpdixit/oreca-release/releases",
-    filename: "Oreca-0.1.0-x64.dmg",
-    size: "192 MB",
+    filename: "Oreca-0.1.0.dmg",
+    size: "165 MB",
     requirements: "macOS 12.0 Monterey or later with Intel 64-bit CPU",
   },
   githubReleases: "https://github.com/Anukalpdixit/oreca-release/releases",

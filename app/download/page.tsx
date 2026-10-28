@@ -290,7 +290,7 @@ function DownloadContent() {
                   <div className="flex items-center justify-between py-1.5 border-b border-black/[0.04]">
                     <span>Architecture</span>
                     <span className="font-mono text-black">
-                      {isMacIntel ? "Intel x64" : "Apple Silicon (arm64)"}
+                      Universal (arm64 / x64)
                     </span>
                   </div>
                   <div className="flex items-center justify-between py-1.5 border-b border-black/[0.04]">
@@ -298,8 +298,8 @@ function DownloadContent() {
                     <span className="font-mono text-black">{DOWNLOAD_CONFIG.macArm.size}</span>
                   </div>
                   <div className="flex items-center justify-between py-1.5">
-                    <span>Silicon Support</span>
-                    <span className="text-black font-medium">M1, M2, M3, M4 native</span>
+                    <span>Architecture Support</span>
+                    <span className="text-black font-medium">Apple Silicon & Intel 64-bit</span>
                   </div>
                 </div>
               </div>
@@ -312,7 +312,7 @@ function DownloadContent() {
                   className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#111] text-white hover:bg-black font-medium text-sm transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <AppleIcon className="w-4 h-4" />
-                  <span>Download for Apple Silicon</span>
+                  <span>Download for macOS</span>
                   <span className="text-xs text-white/60 font-mono">(.dmg)</span>
                 </a>
 
