@@ -30,8 +30,8 @@ export const DOWNLOAD_CONFIG: DownloadConfig = {
     arch: "64-bit",
     url:
       process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL ||
-      "https://github.com/Anukalpdixit/oreca-landing/releases/download/v0.1.0/Oreca.Setup.0.1.0.exe",
-    fallbackUrl: "https://github.com/Anukalpdixit/oreca-landing/releases",
+      "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca.Setup.0.1.0.exe",
+    fallbackUrl: "https://github.com/Anukalpdixit/oreca-release/releases",
     filename: "Oreca Setup 0.1.0.exe",
     size: "208 MB",
     requirements: "Windows 10 (version 1903+) or Windows 11 (64-bit)",
@@ -43,8 +43,8 @@ export const DOWNLOAD_CONFIG: DownloadConfig = {
     arch: "arm64",
     url:
       process.env.NEXT_PUBLIC_MAC_DOWNLOAD_URL ||
-      "https://github.com/Anukalpdixit/oreca-landing/releases/download/v0.1.0/Oreca-0.1.0-arm64.dmg",
-    fallbackUrl: "https://github.com/Anukalpdixit/oreca-landing/releases",
+      "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca-0.1.0-arm64.dmg",
+    fallbackUrl: "https://github.com/Anukalpdixit/oreca-release/releases",
     filename: "Oreca-0.1.0-arm64.dmg",
     size: "185 MB",
     requirements: "macOS 12.0 Monterey, Ventura, Sonoma, or Sequoia",
@@ -56,12 +56,12 @@ export const DOWNLOAD_CONFIG: DownloadConfig = {
     arch: "x64",
     url:
       process.env.NEXT_PUBLIC_MAC_INTEL_DOWNLOAD_URL ||
-      "https://github.com/Anukalpdixit/oreca-landing/releases/download/v0.1.0/Oreca-0.1.0-x64.dmg",
-    fallbackUrl: "https://github.com/Anukalpdixit/oreca-landing/releases",
+      "https://github.com/Anukalpdixit/oreca-release/releases/download/v0.1.0/Oreca-0.1.0-x64.dmg",
+    fallbackUrl: "https://github.com/Anukalpdixit/oreca-release/releases",
     filename: "Oreca-0.1.0-x64.dmg",
     size: "192 MB",
     requirements: "macOS 12.0 Monterey or later with Intel 64-bit CPU",
   },
-  githubReleases: "https://github.com/Anukalpdixit/oreca-landing/releases",
-  publicReleaseUrl: "https://github.com/Anukalpdixit/oreca-landing/releases/tag/v0.1.0",
+  githubReleases: "https://github.com/Anukalpdixit/oreca-release/releases",
+  publicReleaseUrl: "https://github.com/Anukalpdixit/oreca-release/releases/tag/v0.1.0",
 }
