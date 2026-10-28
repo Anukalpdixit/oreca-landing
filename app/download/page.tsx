@@ -249,6 +249,11 @@ function DownloadContent() {
                   <span>Download for Windows</span>
                   <span className="text-xs text-white/60 font-mono">(.exe)</span>
                 </a>
+                <div className="mt-3 text-center">
+                  <span className="text-[11px] text-black/40">
+                    If prompted by SmartScreen: click <strong className="font-medium text-black/60">More info → Run anyway</strong>
+                  </span>
+                </div>
               </div>
             </div>
 
