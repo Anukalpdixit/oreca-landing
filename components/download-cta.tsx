@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import Link from "next/link"
 import { DOWNLOAD_CONFIG, PlatformDownload } from "@/config/downloads"
-import { Download, Check, ExternalLink } from "lucide-react"
+import { Download, ExternalLink } from "lucide-react"
 
 function WindowsIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
@@ -28,7 +29,6 @@ export function DownloadCTA({
   showAlternatives?: boolean
 }) {
   const [platform, setPlatform] = useState<"windows" | "mac">("windows")
-  const [downloading, setDownloading] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -44,16 +44,10 @@ export function DownloadCTA({
   }, [])
 
   const currentDownload: PlatformDownload =
-    platform === "mac" ? DOWNLOAD_CONFIG.mac : DOWNLOAD_CONFIG.windows
+    platform === "mac" ? DOWNLOAD_CONFIG.macArm : DOWNLOAD_CONFIG.windows
+  const altPlatform = platform === "mac" ? "windows" : "mac"
   const altDownload: PlatformDownload =
-    platform === "mac" ? DOWNLOAD_CONFIG.windows : DOWNLOAD_CONFIG.mac
-
-  const handleDownload = (e: React.MouseEvent<HTMLAnchorElement>, dl: PlatformDownload) => {
-    setDownloading(true)
-    setTimeout(() => {
-      setDownloading(false)
-    }, 4000)
-  }
+    platform === "mac" ? DOWNLOAD_CONFIG.windows : DOWNLOAD_CONFIG.macArm
 
   return (
     <div
@@ -61,65 +55,51 @@ export function DownloadCTA({
         align === "center" ? "items-center text-center" : "items-start text-left"
       } w-full`}
     >
-      {/* Primary Download Button */}
+      {/* Primary Download Button -> Routes to /download page just like Cursor */}
       <div className="relative group inline-block">
-        <a
-          href={currentDownload.url}
-          onClick={(e) => handleDownload(e, currentDownload)}
-          download
+        <Link
+          href={`/download?os=${platform}`}
           className="inline-flex items-center gap-3 px-8 py-3.5 bg-[#111] hover:bg-black text-white rounded-full font-medium text-sm transition-all duration-200 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.99] border border-black/10"
         >
-          {downloading ? (
-            <>
-              <Check className="w-4 h-4 text-emerald-400 animate-pulse" />
-              <span>Starting Download...</span>
-            </>
+          {platform === "mac" ? (
+            <AppleIcon className="w-4 h-4 text-white/90" />
           ) : (
-            <>
-              {platform === "mac" ? (
-                <AppleIcon className="w-4 h-4 text-white/90" />
-              ) : (
-                <WindowsIcon className="w-4 h-4 text-white/90" />
-              )}
-              <span className="tracking-tight">
-                Download for {currentDownload.name}
-              </span>
-              <span className="hidden sm:inline-block text-[11px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-white/70">
-                {currentDownload.ext} • {currentDownload.arch}
-              </span>
-            </>
+            <WindowsIcon className="w-4 h-4 text-white/90" />
           )}
-        </a>
+          <span className="tracking-tight">
+            Download for {platform === "mac" ? "macOS" : "Windows"}
+          </span>
+          <span className="hidden sm:inline-block text-[11px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-white/70">
+            {currentDownload.ext} • {currentDownload.arch}
+          </span>
+        </Link>
       </div>
 
       {/* Alternative platforms & versions */}
       {showAlternatives && (
         <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 text-xs text-black/50">
           <span>Also available for</span>
-          <a
-            href={altDownload.url}
-            onClick={(e) => handleDownload(e, altDownload)}
+          <Link
+            href={`/download?os=${altPlatform}`}
             className="inline-flex items-center gap-1 font-medium text-black/80 hover:text-black underline underline-offset-4 decoration-black/20 hover:decoration-black transition-colors"
           >
-            {altDownload.name === "macOS" ? (
+            {altPlatform === "mac" ? (
               <AppleIcon className="w-3 h-3 inline" />
             ) : (
               <WindowsIcon className="w-3 h-3 inline" />
             )}
             <span>
-              {altDownload.name} ({altDownload.ext})
+              {altPlatform === "mac" ? "macOS (.dmg)" : "Windows (.exe)"}
             </span>
-          </a>
+          </Link>
           <span className="text-black/30">•</span>
-          <a
-            href={DOWNLOAD_CONFIG.githubReleases}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/download"
             className="inline-flex items-center gap-1 text-black/50 hover:text-black transition-colors"
           >
-            <span>v{DOWNLOAD_CONFIG.version} releases</span>
+            <span>All Platforms</span>
             <ExternalLink className="w-3 h-3" />
-          </a>
+          </Link>
         </div>
       )}
     </div>

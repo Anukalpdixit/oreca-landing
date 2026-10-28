@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { DOWNLOAD_CONFIG } from "@/config/downloads"
+import { useState } from "react"
+import Link from "next/link"
 import { Download } from "lucide-react"
 
 const NAV_LINKS = [
@@ -21,18 +21,6 @@ const NAV_STYLE = {
 
 export function MobileNav() {
   const [open, setOpen] = useState(false)
-  const [downloadUrl, setDownloadUrl] = useState(DOWNLOAD_CONFIG.windows.url)
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const ua = window.navigator.userAgent.toLowerCase()
-      if (ua.includes("mac") || ua.includes("darwin")) {
-        setDownloadUrl(DOWNLOAD_CONFIG.mac.url)
-      } else {
-        setDownloadUrl(DOWNLOAD_CONFIG.windows.url)
-      }
-    }
-  }, [])
 
   const close = () => setOpen(false)
 
@@ -45,7 +33,9 @@ export function MobileNav() {
           className="flex items-center justify-between px-5 py-3 rounded-2xl border border-black/[0.06]"
           style={NAV_STYLE}
         >
-          <span className="font-pixel text-xs tracking-[0.25em] text-black/70">ORECA</span>
+          <Link href="/" className="font-pixel text-xs tracking-[0.25em] text-black/70">
+            ORECA
+          </Link>
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-7" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
@@ -61,15 +51,14 @@ export function MobileNav() {
           </div>
 
           <div className="flex items-center gap-2">
-            <a
-              href={downloadUrl}
-              download
+            <Link
+              href="/download"
               className="text-[11px] font-medium px-4 py-2 rounded-xl bg-[#111] text-white hover:bg-black transition-all duration-200 tracking-wide hidden md:inline-flex items-center gap-1.5 shadow-sm"
               style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
             >
               <Download className="w-3.5 h-3.5" />
               <span>DOWNLOAD</span>
-            </a>
+            </Link>
 
             {/* Burger — mobile only */}
             <button
@@ -124,16 +113,15 @@ export function MobileNav() {
               </a>
             ))}
             <div className="mt-1 px-2 pb-1">
-              <a
-                href={downloadUrl}
-                download
+              <Link
+                href="/download"
                 onClick={close}
                 className="w-full text-[11px] font-medium px-4 py-2.5 rounded-xl bg-[#111] text-white hover:bg-black transition-all duration-200 tracking-wide inline-flex items-center justify-center gap-2"
                 style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>DOWNLOAD APP</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
